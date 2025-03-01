@@ -4,7 +4,7 @@ import pandas as pd
 from datetime import datetime
 
 # Constants
-API_URL = "http://localhost:8000"  # FastAPI server address
+API_URL = "https://urlshortener-34x1.onrender.com"#http://localhost:8000"  # FastAPI server address
 
 st.set_page_config(
     page_title="URL Shortener",
