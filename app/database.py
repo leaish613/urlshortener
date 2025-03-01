@@ -7,13 +7,24 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-# Get database URL from environment variables, or use a default
+# # Get database URL from environment variables, or use a default
+# DATABASE_URL = os.getenv(
+#     "DATABASE_URL", 
+#     "postgresql://postgres:postgres@localhost/url_shortener"
+# )
+
+# # Create SQLAlchemy engine
+# engine = create_engine(DATABASE_URL)
+
 DATABASE_URL = os.getenv(
     "DATABASE_URL", 
     "postgresql://postgres:postgres@localhost/url_shortener"
 )
 
-# Create SQLAlchemy engine
+# Append `?sslmode=require` if deploying on Render
+if DATABASE_URL.startswith("postgresql://") and "localhost" not in DATABASE_URL:
+    DATABASE_URL += "?sslmode=require"
+
 engine = create_engine(DATABASE_URL)
 
 # Create a SessionLocal class
